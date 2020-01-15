@@ -1,0 +1,16 @@
+version: 0.2
+
+run-as: root
+phases:
+  build:
+    commands:
+      - touch artifact.txt
+# NOTE: The 'Build' stage must produce an artifact. If the build does not
+# produce an artifact, specify '**/*' for `files`. This represents all files
+# recursively.
+artifacts:
+  files:
+    - artifact.txt
+  name: BUILD_ARTIFACT
+  discard-paths: yes
+
