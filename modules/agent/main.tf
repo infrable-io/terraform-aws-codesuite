@@ -1,7 +1,7 @@
 # -----------------------------------------------------------------------------
 # DEPLOY A CI/CD PIPELINE AGENT.
 # The CodePipeline pipeline is provisioned in the 'source' AWS account.
-# The pipeline 'agent' provisions a role that may be assumed by a role in the
+# The 'agent' module provisions a role that may be assumed by a role in the
 # source account. The 'source' role can then execute cross-account deployments
 # in this account.
 # -----------------------------------------------------------------------------

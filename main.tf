@@ -83,7 +83,7 @@ resource "aws_cloudwatch_event_target" "cloudwatch_event_target" {
   target_id = "${var.project_name}-cloudwatch-events-rule-target"
   rule      = aws_cloudwatch_event_rule.cloudwatch_events_rule.name
   arn       = aws_codepipeline.codepipeline_pipeline.arn
-  role_arn  = aws_iam_role.cloudwatch_role.arn
+  role_arn  = var.cloudwatch_role_arn
 }
 
 # -----------------------------------------------------------------------------
@@ -125,7 +125,7 @@ resource "aws_s3_bucket" "artifact_store_s3_bucket" {
 # -----------------------------------------------------------------------------
 resource "aws_codepipeline" "codepipeline_pipeline" {
   name     = "${var.project_name}-codepipeline-pipeline"
-  role_arn = aws_iam_role.codepipeline_role.arn
+  role_arn = var.codepipeline_role_arn
 
   artifact_store {
     location = aws_s3_bucket.artifact_store_s3_bucket.bucket
@@ -223,7 +223,7 @@ resource "aws_codepipeline" "codepipeline_pipeline" {
 # -----------------------------------------------------------------------------
 resource "aws_codebuild_project" "docker_codebuild_project" {
   name         = "${var.project_name}-docker"
-  service_role = aws_iam_role.codebuild_role.arn
+  service_role = var.codebuild_role_arn
 
   artifacts {
     type = "CODEPIPELINE"
@@ -281,7 +281,7 @@ resource "aws_codebuild_project" "docker_codebuild_project" {
 # -----------------------------------------------------------------------------
 resource "aws_codebuild_project" "build_codebuild_project" {
   name         = "${var.project_name}-build"
-  service_role = aws_iam_role.codebuild_role.arn
+  service_role = var.codebuild_role_arn
 
   artifacts {
     type = "CODEPIPELINE"
@@ -338,7 +338,7 @@ resource "aws_codebuild_project" "deploy_codebuild_project" {
   # need to be updated.
   name = each.key == "current" ? "${var.project_name}-deploy" : "${var.project_name}-deploy-${lower(each.key)}"
 
-  service_role = aws_iam_role.codebuild_role.arn
+  service_role = var.codebuild_role_arn
 
   artifacts {
     type = "CODEPIPELINE"
@@ -371,52 +371,4 @@ resource "aws_codebuild_project" "deploy_codebuild_project" {
     type                = "CODEPIPELINE"
   }
 
-}
-
-# -----------------------------------------------------------------------------
-# AMAZON CLOUDWATCH EVENTS ROLE
-# This role comprises an assume role policy and required permissions for the
-# service. Both the assume role policy and policy document for the policy
-# associated with this role can be found in `policies.tf`.
-# -----------------------------------------------------------------------------
-resource "aws_iam_role" "cloudwatch_role" {
-  name               = "${var.project_name}-cloudwatch-events-service-role"
-  assume_role_policy = data.aws_iam_policy_document.events_assume_role_policy.json
-}
-
-resource "aws_iam_role_policy" "cloudwatch_role_policy" {
-  policy = data.aws_iam_policy_document.cloudwatch_policy_document.json
-  role   = aws_iam_role.cloudwatch_role.id
-}
-
-# -----------------------------------------------------------------------------
-# AWS CODEPIPELINE ROLE
-# This role comprises an assume role policy and required permissions for the
-# service. Both the assume role policy and policy document for the policy
-# associated with this role can be found in `policies.tf`.
-# -----------------------------------------------------------------------------
-resource "aws_iam_role" "codepipeline_role" {
-  name               = "${var.project_name}-codepipeline-service-role"
-  assume_role_policy = data.aws_iam_policy_document.codepipeline_assume_role_policy.json
-}
-
-resource "aws_iam_role_policy" "codepipeline_role_policy" {
-  policy = data.aws_iam_policy_document.codepipeline_policy_document.json
-  role   = aws_iam_role.codepipeline_role.id
-}
-
-# -----------------------------------------------------------------------------
-# AWS CODEBUILD ROLE
-# This role comprises an assume role policy and required permissions for the
-# service. Both the assume role policy and policy document for the policy
-# associated with this role can be found in `policies.tf`.
-# -----------------------------------------------------------------------------
-resource "aws_iam_role" "codebuild_role" {
-  name               = "${var.project_name}-codebuild-service-role"
-  assume_role_policy = data.aws_iam_policy_document.codebuild_assume_role_policy.json
-}
-
-resource "aws_iam_role_policy" "codebuild_role_policy" {
-  policy = data.aws_iam_policy_document.codebuild_policy_document.json
-  role   = aws_iam_role.codebuild_role.id
 }

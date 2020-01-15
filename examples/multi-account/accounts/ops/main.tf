@@ -40,9 +40,20 @@ module "pipeline_agent" {
   destination_codebuild_role_name = var.destination_codebuild_role_name
 }
 
+module "pipeline_roles" {
+  source                          = "../../../../modules/roles"
+  destination_codebuild_role_name = var.destination_codebuild_role_name
+}
+
 module "pipeline" {
   source                          = "../../../../"
   destination_account_ids         = var.destination_account_ids
   project_name                    = "multi-account"
   destination_codebuild_role_name = var.destination_codebuild_role_name
+  # In order to prevent the duplication of CloudWatch, CodePipeline, and
+  # CodeBuild service roles, these resources are extracted into the 'roles'
+  # module and their ARNs are imported as variables.
+  cloudwatch_role_arn   = module.pipeline_roles.cloudwatch_role_arn
+  codepipeline_role_arn = module.pipeline_roles.codepipeline_role_arn
+  codebuild_role_arn    = module.pipeline_roles.codebuild_role_arn
 }

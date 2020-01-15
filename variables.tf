@@ -36,6 +36,24 @@ variable "destination_account_ids" {
   EOF
 }
 
+variable "cloudwatch_role_name" {
+  type        = string
+  default     = "cloudwatch-events-service-role"
+  description = "Name of the Amazon CloudWatch Events service role."
+}
+
+variable "codepipeline_role_name" {
+  type        = string
+  default     = "codepipeline-service-role"
+  description = "Name of the AWS CodePipeline service role."
+}
+
+variable "codebuild_role_name" {
+  type        = string
+  default     = "codebuild-service-role"
+  description = "Name of the AWS CodeBuild service role."
+}
+
 variable "docker_build_spec" {
   type        = string
   default     = "codebuild/docker/buildspec.yml"
@@ -80,4 +98,19 @@ variable "project_name" {
   "Name of the project. This name will be prepended to all resources that are
   associated with this module."
   EOF
+}
+
+variable "cloudwatch_role_arn" {
+  type        = string
+  description = "The ARN of the Amazon CloudWatch Events service role."
+}
+
+variable "codepipeline_role_arn" {
+  type        = string
+  description = "The ARN of the AWS CodePipeline service role."
+}
+
+variable "codebuild_role_arn" {
+  type        = string
+  description = "The ARN of the AWS CodeBuild service role."
 }

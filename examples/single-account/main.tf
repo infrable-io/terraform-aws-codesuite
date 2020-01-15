@@ -19,13 +19,17 @@ provider "aws" {
 
 # -----------------------------------------------------------------------------
 # AWS CODEBUILD ROLE POLICY
-# This policy is applied to the CodeBuild service role defined by the 'pipeine'
-# module. This policy should be used to grant CodeBuild the neccessary
-# permissions to provision AWS resources.
+# This policy is applied to the CodeBuild service role defined by the
+# 'pipeine-roles' module. This policy should be used to grant CodeBuild the
+# neccessary permissions to provision AWS resources.
 # -----------------------------------------------------------------------------
 resource "aws_iam_role_policy" "administrator_role_policy" {
   policy = data.aws_iam_policy_document.administrator_policy_document.json
-  role   = module.pipeline.codebuild_role_id
+  role   = module.pipeline_roles.codebuild_role_id
+}
+
+module "pipeline_roles" {
+  source = "../../modules/roles"
 }
 
 module "pipeline" {
@@ -35,4 +39,10 @@ module "pipeline" {
   # added here for demonstration.
   destination_account_ids = { "current" : "" }
   project_name            = "single-account"
+  # In order to prevent the duplication of CloudWatch, CodePipeline, and
+  # CodeBuild service roles, these resources are extracted into the 'roles'
+  # module and their ARNs are imported as variables.
+  cloudwatch_role_arn   = module.pipeline_roles.cloudwatch_role_arn
+  codepipeline_role_arn = module.pipeline_roles.codepipeline_role_arn
+  codebuild_role_arn    = module.pipeline_roles.codebuild_role_arn
 }
