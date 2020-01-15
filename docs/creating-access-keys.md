@@ -19,23 +19,23 @@ Access key creation can be done in the AWS Management Console or via the AWS CLI
 `~/.aws/credentials`
 
 ```
-[dwolla-operations]
+[operations]
 aws_access_key_id = [redacted]
 aws_secret_access_key = [redacted]
 region=us-west-2
 output=json
 ```
 
-To set your `dwolla-operations` AWS profile, execute:
+To set your `operations` AWS profile, execute:
 
 ```bash
-export AWS_PROFILE=dwolla-operations
+export AWS_PROFILE=operations
 ```
 
 This can be added as an alias to your `.bashrc` or `.zshrc` if desired:
 
 ```bash
-alias aws-dwolla-operations='export AWS_PROFILE=dwolla-operations'
+alias aws-operations='export AWS_PROFILE=operations'
 ```
 
 5. Test your access keys.

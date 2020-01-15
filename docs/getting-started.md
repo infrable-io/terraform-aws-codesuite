@@ -4,7 +4,7 @@ The following will assist you in getting started with our AWS environment.
 
 ## Step 1: Log in
 
-1. Go to the [AWS Management Console](https://signin.aws.amazon.com/oauth?redirect_uri=https%3A%2F%2Fconsole.aws.amazon.com%2Fconsole%2Fhome%3Fstate%3DhashArgs%2523%26isauthcode%3Dtrue&client_id=arn%3Aaws%3Aiam%3A%3A015428540659%3Auser%2Fhomepage&response_type=code&iam_user=true&account=dwolla-operations). This will bring you to the sign in page for the `dwolla-operations` AWS account.
+1. Go to the [AWS Management Console](https://signin.aws.amazon.com/signin?redirect_uri=https%3A%2F%2Fconsole.aws.amazon.com%2Fconsole%2Fhome%3Fstate%3DhashArgs%2523%26isauthcode%3Dtrue&client_id=arn%3Aaws%3Aiam%3A%3A015428540659%3Auser%2Fhomepage&forceMobileApp=0).
 
 2. Sign in using your username and temporary password.
 
