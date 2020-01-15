@@ -2,9 +2,6 @@ version: 0.2
 
 run-as: root
 phases:
-  install:
-    commands:
-      - /bin/true
   pre_build:
     commands:
       - echo "Assuming cross-account CodeBuild role..."

@@ -17,6 +17,17 @@ provider "aws" {
   version = "~> 2.44"
 }
 
+# -----------------------------------------------------------------------------
+# AWS CODEBUILD ROLE POLICY
+# This policy is applied to the CodeBuild service role defined by the
+# 'pipeine-agent' module. This policy should be used to grant CodeBuild the
+# neccessary permissions to provision AWS resources.
+# -----------------------------------------------------------------------------
+resource "aws_iam_role_policy" "administrator_role_policy" {
+  policy = data.aws_iam_policy_document.administrator_policy_document.json
+  role   = module.pipeline_agent.codebuild_role_id
+}
+
 # Calling the 'agent' module allows a deployment to be made to this (ops) AWS
 # Account. The 'source' CodeBuild role assumes the 'destination' CodeBuild role
 # which resided in the same account and has the same permissions. This small
