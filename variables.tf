@@ -17,9 +17,9 @@ variable "destination_account_ids" {
   Multi-account
 
     {
-      "operations": "<accound-id>",
-      "sandbox": "<accound-id>",
-      "production": "<accound-id>"
+      "operations": "<account-id>",
+      "sandbox": "<account-id>",
+      "production": "<account-id>"
     }
 
   Single-account

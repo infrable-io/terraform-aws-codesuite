@@ -321,9 +321,9 @@ resource "aws_codebuild_project" "build_codebuild_project" {
 # The following is an example of the `destination_account_ids` variable:
 #
 #  {
-#    "operations": "<accound-id>",
-#    "sandbox": "<accound-id>",
-#    "production": "<accound-id>"
+#    "operations": "<account-id>",
+#    "sandbox": "<account-id>",
+#    "production": "<account-id>"
 #  }
 # -----------------------------------------------------------------------------
 resource "aws_codebuild_project" "deploy_codebuild_project" {
