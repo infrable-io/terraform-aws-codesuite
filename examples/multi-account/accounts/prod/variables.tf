@@ -20,7 +20,6 @@ variable "source_codebuild_role_name" {
 
 variable "destination_codebuild_role_name" {
   type        = string
-  default     = ""
   description = <<-EOF
   "Name of the CodeBuild service role that can be assumed by a role in the
   'source' account. This role must exist in an account to which you wish to
@@ -30,6 +29,7 @@ variable "destination_codebuild_role_name" {
   For single-account deployments, this variable is not used and therefore
   defaults to an empty string ("")."
 
-  For multi-account deployments, this role is created when calling this module.
+  For multi-account deployments, this role is created when calling the 'agent'
+  child module.
   EOF
 }
