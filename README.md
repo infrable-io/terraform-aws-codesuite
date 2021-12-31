@@ -1,3 +1,4 @@
 # AWS CodeSuite Terraform Module
 
-[![Maintained by Infrable.io](https://img.shields.io/badge/maintained%20by-infrable.io-6c71c4)](https://infrable.io/)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/infrable-io/terraform-aws-codesuite/blob/master/LICENSE)
+[![Maintained by Infrable.io](https://img.shields.io/badge/Maintained%20by-Infrable.io-000000)](https://infrable.io/)
