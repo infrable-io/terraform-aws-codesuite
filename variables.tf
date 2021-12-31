@@ -2,37 +2,36 @@
 # OPTIONAL VARIABLES
 # -----------------------------------------------------------------------------
 variable "aws_region" {
-  type    = string
-  default = "us-east-1"
+  type        = string
+  default     = "us-east-1"
+  description = "AWS region to deploy to"
 }
 
 variable "destination_account_ids" {
   type        = map(string)
   default     = { "current" : "" }
   description = <<-EOF
-  "Account IDs of the AWS accounts to which to deploy.
+  Account IDs of the AWS accounts to which to deploy.
 
   EXAMPLES
 
-  Multi-account
+  **Multi-account**
 
-    {
-      "operations": "<account-id>",
-      "sandbox": "<account-id>",
-      "production": "<account-id>"
-    }
+    ```
+    {"operations": "<account-id>", "sandbox": "<account-id>", "production": "<account-id>"}
+    ```
 
-  Single-account
+  **Single-account**
 
-    {
-      "current": ""
-    }
+    ```
+    {"current": ""}
+    ```
 
   If a value is an empty string (""), the deployment is executed in the current
   account.
 
   The `current` key is used to designate the case in which a deployment is only
-  to be made in the current account."
+  to be made in the current account.
   EOF
 }
 
@@ -76,13 +75,13 @@ variable "destination_codebuild_role_name" {
   type        = string
   default     = ""
   description = <<-EOF
-  "Name of the CodeBuild service role that can be assumed by a role in the
+  Name of the CodeBuild service role that can be assumed by a role in the
   'source' account. This role must exist in an account to which you wish to
   deploy. The CodeBuild service role in the source account may assume this role
   to execute deployments.
 
   For single-account deployments, this variable is not used and therefore
-  defaults to an empty string ("")."
+  defaults to an empty string ("").
 
   For multi-account deployments, this role is created when calling the 'agent'
   child module.
@@ -95,8 +94,8 @@ variable "destination_codebuild_role_name" {
 variable "project_name" {
   type        = string
   description = <<-EOF
-  "Name of the project. This name will be prepended to all resources that are
-  associated with this module."
+  Name of the project. This name will be prepended to all resources that are
+  associated with this module.
   EOF
 }
 

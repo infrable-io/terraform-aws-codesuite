@@ -1,7 +1,7 @@
 # AWS CodeSuite Terraform Module
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/infrable-io/terraform-aws-codesuite/blob/master/LICENSE)
-[![Maintained by Infrable.io](https://img.shields.io/badge/Maintained%20by-Infrable.io-000000)](https://infrable.io/)
+[![Maintained by Infrable.io](https://img.shields.io/badge/Maintained%20by-Infrable.io-000000)](https://infrable.io)
 
 A Terraform module for creating AMS CodeSuite (AWS CodeCommit, AWS CodeBuild, AWS CodeDeploy, AWS CodePipeline) infrastructure.
 
@@ -28,7 +28,7 @@ A Terraform module for creating AMS CodeSuite (AWS CodeCommit, AWS CodeBuild, AW
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | ----------------------------------------------------------------------------- OPTIONAL VARIABLES ----------------------------------------------------------------------------- | `string` | `"us-east-1"` | no |
+| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS region to deploy to | `string` | `"us-east-1"` | no |
 | <a name="input_build_build_spec"></a> [build\_build\_spec](#input\_build\_build\_spec) | Location of the buildspec.yml for the 'Build' stage. | `string` | `"codebuild/build/buildspec.yml"` | no |
 | <a name="input_cloudwatch_role_arn"></a> [cloudwatch\_role\_arn](#input\_cloudwatch\_role\_arn) | The ARN of the Amazon CloudWatch Events service role. | `string` | n/a | yes |
 | <a name="input_cloudwatch_role_name"></a> [cloudwatch\_role\_name](#input\_cloudwatch\_role\_name) | Name of the Amazon CloudWatch Events service role. | `string` | `"cloudwatch-events-service-role"` | no |
@@ -37,10 +37,10 @@ A Terraform module for creating AMS CodeSuite (AWS CodeCommit, AWS CodeBuild, AW
 | <a name="input_codepipeline_role_arn"></a> [codepipeline\_role\_arn](#input\_codepipeline\_role\_arn) | The ARN of the AWS CodePipeline service role. | `string` | n/a | yes |
 | <a name="input_codepipeline_role_name"></a> [codepipeline\_role\_name](#input\_codepipeline\_role\_name) | Name of the AWS CodePipeline service role. | `string` | `"codepipeline-service-role"` | no |
 | <a name="input_deploy_build_spec"></a> [deploy\_build\_spec](#input\_deploy\_build\_spec) | Location of the buildspec.yml for the 'Deploy' stage. | `string` | `"codebuild/deploy/buildspec.yml"` | no |
-| <a name="input_destination_account_ids"></a> [destination\_account\_ids](#input\_destination\_account\_ids) | "Account IDs of the AWS accounts to which to deploy.<br><br>EXAMPLES<br><br>Multi-account<br><br>  {<br>    "operations": "<account-id>",<br>    "sandbox": "<account-id>",<br>    "production": "<account-id>"<br>  }<br><br>Single-account<br><br>  {<br>    "current": ""<br>  }<br><br>If a value is an empty string (""), the deployment is executed in the current<br>account.<br><br>The `current` key is used to designate the case in which a deployment is only<br>to be made in the current account." | `map(string)` | <pre>{<br>  "current": ""<br>}</pre> | no |
-| <a name="input_destination_codebuild_role_name"></a> [destination\_codebuild\_role\_name](#input\_destination\_codebuild\_role\_name) | "Name of the CodeBuild service role that can be assumed by a role in the<br>'source' account. This role must exist in an account to which you wish to<br>deploy. The CodeBuild service role in the source account may assume this role<br>to execute deployments.<br><br>For single-account deployments, this variable is not used and therefore<br>defaults to an empty string ("")."<br><br>For multi-account deployments, this role is created when calling the 'agent'<br>child module. | `string` | `""` | no |
+| <a name="input_destination_account_ids"></a> [destination\_account\_ids](#input\_destination\_account\_ids) | Account IDs of the AWS accounts to which to deploy.<br><br>EXAMPLES<br><br>**Multi-account**<pre>{"operations": "<account-id>", "sandbox": "<account-id>", "production": "<account-id>"}</pre>**Single-account**<pre>{"current": ""}</pre>If a value is an empty string (""), the deployment is executed in the current account.<br><br>The `current` key is used to designate the case in which a deployment is only to be made in the current account. | `map(string)` | <pre>{"current": ""}</pre> | no |
+| <a name="input_destination_codebuild_role_name"></a> [destination\_codebuild\_role\_name](#input\_destination\_codebuild\_role\_name) | Name of the CodeBuild service role that can be assumed by a role in the 'source' account. This role must exist in an account to which you wish to deploy. The CodeBuild service role in the source account may assume this role to execute deployments.<br><br>For single-account deployments, this variable is not used and therefore defaults to an empty string ("").<br><br>For multi-account deployments, this role is created when calling the 'agent' child module. | `string` | `""` | no |
 | <a name="input_docker_build_spec"></a> [docker\_build\_spec](#input\_docker\_build\_spec) | Location of the buildspec.yml for the 'Docker' stage. | `string` | `"codebuild/docker/buildspec.yml"` | no |
-| <a name="input_project_name"></a> [project\_name](#input\_project\_name) | "Name of the project. This name will be prepended to all resources that are<br>associated with this module." | `string` | n/a | yes |
+| <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Name of the project. This name will be prepended to all resources that are associated with this module. | `string` | n/a | yes |
 
 ## Outputs
 
